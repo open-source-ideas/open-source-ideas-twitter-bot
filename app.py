@@ -35,12 +35,11 @@ def hello():
 @hooks.hook('issues')
 def issues(data, delivery):
     # Tweet
-    twitter_update_status = 'no-twitter-status-update'
-    tweet = '{0} open source idea! {1} -> {2}'.format(
-        'New' if (data['action'] == 'opened') else 'Updated', 
-        data['issue']['title'], 
-        data['issue']['html_url']
-        )
+    tweet_max_len = 278
+    title = '{} open source idea!'.format('New' if (data['action'] == 'opened') else 'Updated')
+    url = data['issue']['html_url']
+    desc = data['issue']['title'][0:(tweet_max_len-len(title)-len(url))]
+    tweet = '{} {} {}'.format(title, desc, url)
     twitter_update_status = twitter_api.update_status(tweet)
     return str(twitter_update_status)
     
