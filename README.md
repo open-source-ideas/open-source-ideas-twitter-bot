@@ -6,6 +6,6 @@ pip install Flask
 ## Flask-Hookserver
 pip install Flask-Hookserver
 ## Tweepy
-git clone https://github.com/tweepy/tweepy.git
-cd tweepy
-python setup.py install
+git clone https://github.com/tweepy/tweepy.git  
+cd tweepy  
+python setup.py install  
