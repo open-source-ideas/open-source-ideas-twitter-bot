@@ -30,7 +30,7 @@ hooks = Hooks(app, url='/webhooks')
 # flask routes
 @app.route('/')
 def hello():
-    return '<a href="{0}">{0}}</a>'.format('https://github.com/open-source-ideas')
+    return '<a href="{0}">{0}</a>'.format('https://github.com/open-source-ideas')
 
 @hooks.hook('issues')
 def issues(data, delivery):
