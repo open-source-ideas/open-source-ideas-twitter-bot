@@ -10,7 +10,7 @@ sys.setdefaultencoding('utf8')
 twitter_consumer_key = os.environ['OSII_BOT_CONSUMER_KEY']
 twitter_consumer_secret = os.environ['OSII_BOT_CONSUMER_SECRET']
 twitter_access_token = os.environ['OSII_BOT_ACCESS_TOKEN']
-twitter_access_token_secret = os.environ['OSII_BOT_ACCESS_TOKEN']
+twitter_access_token_secret = os.environ['OSII_BOT_ACCESS_TOKEN_SECRET']
 github_webhooks_secret = os.environ['OSII_BOT_WEBHOOKS_SECRET']
 
 # flask app
