@@ -34,14 +34,16 @@ def hello():
 
 @hooks.hook('issues')
 def issues(data, delivery):
-    # Tweet
-    tweet_max_len = 278
-    title = '{} open source idea!'.format('New' if (data['action'] == 'opened') else 'Updated')
-    url = data['issue']['html_url']
-    desc = data['issue']['title'][0:(tweet_max_len-len(title)-len(url))]
-    tweet = '{} {} {}'.format(title, desc, url)
-    twitter_update_status = twitter_api.update_status(tweet)
+    twitter_update_status = 'This hook is not implemented'
+    # Tweet only newly created issues
+    if (data['action'] == 'opened'):
+        tweet_max_len = 278
+        title = 'New open source idea!'
+        url = data['issue']['html_url']
+        desc = data['issue']['title'][0:(tweet_max_len-len(title)-len(url))]
+        tweet = '{} {} {}'.format(title, desc, url)
+        twitter_update_status = twitter_api.update_status(tweet)
     return str(twitter_update_status)
     
 # app running on c9.io
-app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
+# app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
