@@ -40,7 +40,8 @@ def issues(data, delivery):
         tweet_max_len = 278
         title = 'New open source idea!'
         url = data['issue']['html_url']
-        desc = data['issue']['title'][0:(tweet_max_len-len(title)-len(url))]
+        # URL in tweet always counts for 23 characters
+        desc = data['issue']['title'][0:(tweet_max_len-len(title)-23)]
         tweet = '{} {} {}'.format(title, desc, url)
         twitter_update_status = twitter_api.update_status(tweet)
     return str(twitter_update_status)
