@@ -27,6 +27,18 @@ app.config['VALIDATE_IP'] = False
 app.config['VALIDATE_SIGNATURE'] = True
 hooks = Hooks(app, url='/webhooks')
 
+
+def shorten(text, length):
+    """Truncate the text if it is too long.
+    """
+    if len(text) > length:
+        pos = text.rfind(' ', 0, length - 2)
+        if pos == -1:
+            pos = length - 3
+        return text[:pos] + "..."
+    else:
+        return text
+
 # flask routes
 @app.route('/')
 def hello():
@@ -41,7 +53,7 @@ def issues(data, delivery):
         title = 'New open source idea!'
         url = data['issue']['html_url']
         # URL in tweet always counts for 23 characters
-        desc = data['issue']['title'][0:(tweet_max_len-len(title)-23)]
+        desc = shorten(data['issue']['title'], tweet_max_len - len(title) - 23)
         tweet = '{} {} {}'.format(title, desc, url)
         twitter_update_status = twitter_api.update_status(tweet)
     return str(twitter_update_status)
